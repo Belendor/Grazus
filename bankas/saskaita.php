@@ -4,15 +4,23 @@ if(!empty($_POST) && !empty($_POST['name'])){
 
     $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
 
-    print_r($data);
-    print_r($_POST);
-
     $name = $_POST['name'];
     $surename = $_POST['surename'];
     $account = $_POST['account'];
     $userNr = $_POST['user-nr'];
-}else{
-    echo 'empty';
+
+    $newObject = [
+        'name'=> $name,
+        'surename' => $surename,
+        'account' => $account,
+        'user-nr' => $userNr,
+        'lesos' => 0
+    ];
+
+    $data[] = $newObject;
+
+    file_put_contents(__DIR__ .'/data.json', json_encode($data));
+
 }
 
 
@@ -26,6 +34,7 @@ if(!empty($_POST) && !empty($_POST['name'])){
 </head>
 <body>
     
+
     <form action="" method="post">
     <label for="name"> Vardas: <br>
         <input type="text" name="name"> <br>
@@ -42,6 +51,7 @@ if(!empty($_POST) && !empty($_POST['name'])){
     <button type="submit">Ivesti nauja saskaita</button>
     </form>
 
+    <a href="/grazus/bankas/saskaitu-sarasas.php">Perziureti visas saskaitas</a>
 
 </body>
 </html>
