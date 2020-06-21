@@ -1,11 +1,20 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
+    header('Location: /grazus/bankas/login.php');
+    die();
+}
+
+
 if(!empty($_POST)){
 
     $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
 
     if(array_key_exists('sum', $_POST)){
         foreach($data as &$value){
-            if($value['account'] = $_POST['account']){
+            if($value['account'] == $_POST['account']){
                 $value['lesos'] += $_POST['sum'];
             }
         }
@@ -37,8 +46,6 @@ if(!empty($_POST)){
                 <td>'.$input.'</td>
                 </tr>';
 
-
-    _dc($_POST);
 }
 
 if(!empty($_GET)){
@@ -55,7 +62,7 @@ if(!empty($_GET)){
     }
 
     $input = '<form action="/grazus/bankas/prideti-lesas.php" method="post">
-            <input type="number" name="sum">
+            <input type="number" name="sum" min="0">
             <input type="hidden" name="name" value="'.$selected['name'].'">
             <input type="hidden" name="surename" value="'.$selected['surename'].'">
             <input type="hidden" name="account" value="'.$selected['account'].'">
@@ -73,8 +80,6 @@ if(!empty($_GET)){
                 <td>'.$selected['lesos'].'</td>
                 <td>'.$input.'</td>
                 </tr>';
-
-    _dc($_GET);
 }
 
 
@@ -107,6 +112,7 @@ if(!empty($_GET)){
 
     </table>
 
-    <a href="/grazus/bankas/saskaitu-sarasas.php">Perziureti visas saskaitas</a>
+    <a href="/grazus/bankas/saskaitu-sarasas.php">Perziureti visas saskaitas</a><br>
+    <a href="/grazus/bankas/login.php?logout">Atsijungti</a><br>
 </body>
 </html>

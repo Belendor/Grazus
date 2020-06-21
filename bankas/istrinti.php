@@ -1,0 +1,32 @@
+<?php 
+session_start();
+
+if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
+    header('Location: /grazus/bankas/login.php');
+    die();
+}
+
+if(array_key_exists('delete', $_POST)){
+
+    $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+
+    foreach($data as $key => &$value){
+
+        if($_POST['delete'] == $value['account']){
+
+            if($value['lesos'] > 0){
+                // Jei negalima trinti
+            }else{
+                unset($data[$key]);
+            }
+
+        }
+
+    }
+
+    file_put_contents(__DIR__ .'/data.json', json_encode($data));
+
+    header("Location: /grazus/bankas/saskaitu-sarasas.php");
+    die();
+}
+
