@@ -17,10 +17,7 @@ if(array_key_exists('delete', $_POST)){
             if($value['lesos'] > 0){
                 $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
             }else{
-                _d($key);
-                _d($data);
                 array_splice($data, $key, 1);
-                _d($data);
             }
 
         }
