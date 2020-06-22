@@ -17,13 +17,13 @@ if(!empty($_POST) && !empty($_POST['name'])){
         die();
     }
 
-    if(strlen($_POST['name']) < 4){
+    if(strlen($_POST['name']) < 3){
         $_SESSION['note'] = 'Vardas yra per trumpas';
         header("Location: /grazus/bankas/saskaita.php");
         die();
     }
 
-    if(strlen($_POST['surename']) < 4){
+    if(strlen($_POST['surename']) < 3){
         $_SESSION['note'] = 'Pavarde yra per trumpa';
         header("Location: /grazus/bankas/saskaita.php");
         die();

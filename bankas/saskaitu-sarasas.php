@@ -105,6 +105,15 @@ foreach($sorted as $value){
 </head>
 <body>
 
+    <p><?php  
+        
+        if(isset($_SESSION['note'])) {
+            echo $_SESSION['note'];
+            unset($_SESSION['note']);
+        }
+
+    ?></p><br>
+
     <div style="width 100%; border: solid 1px black">
     <table style="width:100%">
 

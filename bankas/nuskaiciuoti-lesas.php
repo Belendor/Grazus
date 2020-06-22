@@ -12,8 +12,14 @@ if(!empty($_POST)){
 
     if(array_key_exists('sum', $_POST)){
         foreach($data as &$value){
-            if($value['account'] == $_POST['account'] && $value['lesos'] >= $_POST['sum']){
-                $value['lesos'] -= $_POST['sum'];
+            if($value['account'] == $_POST['account']){
+                if($value['lesos'] >= $_POST['sum']){
+                    $value['lesos'] -= $_POST['sum'];
+                    $_SESSION['note'] = 'Pinigai nuskaiciuoti sekmingai';
+                }else{
+                    $_SESSION['note'] = 'Nepakankamai lesu saskaitoje nurasyti tokia suma';
+                }
+
             }
         }
 
@@ -97,6 +103,16 @@ if(!empty($_GET)){
     <title>Prideti lesas</title>
 </head>
 <body>
+
+    <p><?php  
+        
+        if(isset($_SESSION['note'])) {
+            echo $_SESSION['note'];
+            unset($_SESSION['note']);
+        }
+
+    ?></p><br>
+
     <table style="width:100%">
         <th>Vardas</th>
         <th>Pavarde</th> 

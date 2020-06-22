@@ -10,14 +10,17 @@ if(array_key_exists('delete', $_POST)){
 
     $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
 
-    foreach($data as $key => &$value){
+    foreach($data as $key => $value){
 
         if($_POST['delete'] == $value['account']){
 
             if($value['lesos'] > 0){
-                // Jei negalima trinti
+                $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
             }else{
-                unset($data[$key]);
+                _d($key);
+                _d($data);
+                array_splice($data, $key, 1);
+                _d($data);
             }
 
         }

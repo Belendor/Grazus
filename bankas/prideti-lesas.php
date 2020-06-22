@@ -16,6 +16,7 @@ if(!empty($_POST)){
         foreach($data as &$value){
             if($value['account'] == $_POST['account']){
                 $value['lesos'] += $_POST['sum'];
+                $_SESSION['note'] = 'Pinigai prideti sekmingai';
             }
         }
 
@@ -24,7 +25,6 @@ if(!empty($_POST)){
         header("Location: /grazus/bankas/prideti-lesas.php?account=".$_POST['account']."");
         die();
     }
-
 
     $input = '<form action="/grazus/bankas/prideti-lesas.php" method="post">
             <input type="number" name="sum">
@@ -35,7 +35,6 @@ if(!empty($_POST)){
             <input type="hidden" name="lesos" value="'.$_POST['lesos'].'">
             <button type="submit">Prideti Lesas</button>
             </form>';
-
 
     $renderRow = '<tr>
                 <td>'.$_POST['name'].'</td>
@@ -97,9 +96,19 @@ if(!empty($_GET)){
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prideti lesas</title>
+    <title>Nurasyti lesas</title>
 </head>
 <body>
+
+    <p><?php  
+        
+        if(isset($_SESSION['note'])) {
+            echo $_SESSION['note'];
+            unset($_SESSION['note']);
+        }
+
+    ?></p><br>
+
     <table style="width:100%">
         <th>Vardas</th>
         <th>Pavarde</th> 
