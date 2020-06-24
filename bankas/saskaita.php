@@ -7,7 +7,6 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
     die();
 }
 
-
 if(!empty($_POST) && !empty($_POST['name'])){
 
 
@@ -29,8 +28,6 @@ if(!empty($_POST) && !empty($_POST['name'])){
         die();
     }
 
-
-
     $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
 
     $uniqueId = true;
@@ -40,7 +37,6 @@ if(!empty($_POST) && !empty($_POST['name'])){
 
         if($value['user-nr'] == $_POST['user-nr']){
            
-
             $uniqueId = false;
         }
 
@@ -103,7 +99,6 @@ function generateID(){
 
     return $string;
 }
-
 
 ?>
 <!DOCTYPE html>

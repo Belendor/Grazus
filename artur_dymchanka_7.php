@@ -48,5 +48,3 @@ $form3 = '<form action="" method="post" name="button">
 
 echo '<div style="width: 100%; height: 100vh; background-color:'.$backgroundColor.'">'.$link.$link2.$link3.$link4.$link5.$link6.$form.$form2.$form3.'</div>';
 
-// 2.
-// 3.

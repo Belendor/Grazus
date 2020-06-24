@@ -19,9 +19,8 @@ if(array_key_exists('delete', $_POST)){
             }else{
                 array_splice($data, $key, 1);
             }
-
         }
-
+        
     }
 
     file_put_contents(__DIR__ .'/data.json', json_encode($data));
