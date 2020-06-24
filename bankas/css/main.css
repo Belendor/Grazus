@@ -15,7 +15,7 @@ body{
 
 .lock{
     display: flex;
-    width: 30%;
+    width: 40%;
     float: left;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@ body{
 
 .form{
     display: inline-block;
-    width: 70%;
+    width: 60%;
     float: left;
     margin-left: 5px;
     justify-content: center;
@@ -67,6 +67,7 @@ button{
     color: white;
     font-weight: 800;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 button:hover{
@@ -79,4 +80,49 @@ button:hover{
     background-color: white;
     border-radius: 40px;
     margin-bottom: 5px;
+}
+
+.menu{
+    display: inline-block;
+    padding: 5px 0;
+}
+
+a{
+    font-family: 'SEB Sans Serif';
+    text-decoration: unset;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+a:hover{
+    color: rgb(3, 3, 44);
+}
+
+.text-icon{
+    font-size: 18px;
+    margin-left: 4px;
+}
+
+p{
+    width: 100%;
+}
+
+.error{
+    color:red;
+    margin-bottom: 4px;
+    margin-top: -4px;
+}
+.message{
+    border-radius: 10px;
+    line-height: 30px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.red{
+    background-color: rgba(201, 63, 63, 0.74);
+}
+
+.green{
+    background-color: rgba(35, 173, 35, 0.74);
 }

@@ -61,7 +61,6 @@ if(!empty($_POST)){
             <input type="text" name="name"> <br>
         </label>
 
-
         <label for="password"> Slaptazodis <br>
             <input type="password" name="password"> <br>
         </label>
