@@ -61,12 +61,21 @@ if(!empty($_POST) && !empty($_POST['name'])){
     
         file_put_contents(__DIR__ .'/data.json', json_encode($data));
 
-        $_SESSION['note'] = 'Nauja saskaita buvo uzregistruota';
+        $_SESSION['note'] = [
+            "message" => "message",
+            "text" => 'Nauja saskaita sukurta sekmingai'
+        ];
+
         header("Location: /grazus/bankas/saskaita.php");
         die();
 
     }else{
-        $_SESSION['note'] = 'Toks asmens kodas jau yra uzimtas';
+
+        $_SESSION['note'] = [
+            "message" => "error",
+            "text" => 'Toks asmens kodas jau yra uzimtas'
+        ];
+
         header("Location: /grazus/bankas/saskaita.php");
         die();
     }
@@ -89,8 +98,8 @@ function generateID(){
 
     $string .= rand(1,6);
     $string .= str_pad(rand(0,99), 2, "0", STR_PAD_LEFT);
-    $string .= str_pad(rand(0,12), 2, "0", STR_PAD_LEFT);
-    $string .= str_pad(rand(0,31), 2, "0", STR_PAD_LEFT);
+    $string .= str_pad(rand(1,12), 2, "0", STR_PAD_LEFT);
+    $string .= str_pad(rand(1,31), 2, "0", STR_PAD_LEFT);
 
     for($i = 0; $i<4; $i++){
         $randNr = rand(0,9);
@@ -100,6 +109,17 @@ function generateID(){
     return $string;
 }
 
+$errorColor = '';
+
+if(isset($_SESSION['note'])){
+    if($_SESSION['note']['message'] == 'message'){
+        $errorColor = 'green';
+    }else{
+        $errorColor = 'red';
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,34 +127,67 @@ function generateID(){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saskaitos</title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
 </head>
 <body>
-    <p><?php  
-    
-        if(isset($_SESSION['note'])) {
-            echo $_SESSION['note'];
-            unset($_SESSION['note']);
-        }
-    
-    ?></p><br>
 
-    <form action="" method="post">
-    <label for="name"> Vardas: <br>
-        <input type="text" name="name"> <br>
-    </label> 
-    <label for="surename"> Pavarde: <br>
-        <input type="text" name="surename"> <br>
-    </label>
-    <label for="account"> Saskaitos Numeris: <br>
-        <input type="text" name="account" value="<?=generateIban()?>" readonly><br>
-    </label>
-    <label for="user-nr"> Asmens kodas:  <br>
-        <input type="number" name="user-nr" value="<?=generateID()?>"><br>
-    </label><br>
-    <button type="submit">Ivesti nauja saskaita</button>
-    </form>
+    <div class="container">
 
-    <a href="/grazus/bankas/saskaitu-sarasas.php">Perziureti visas saskaitas</a><br>
-    <a href="/grazus/bankas/login.php?logout">Atsijungti</a><br>
+        <div class="form">
+            <h1>Nauja Saskaita</h1>
+            <div class="line"></div>
+
+                <p class="message <?=$errorColor?> "><?php  
+        
+                    if(isset($_SESSION['note'])) {
+                    
+                        echo $_SESSION['note']['text'];
+                        unset($_SESSION['note']);
+                        
+                    }
+
+                ?></p><br>
+
+            <form action="" method="post">
+                <label for="name"> Vardas: <br>
+                    <input id="input-name" type="text" name="name" required> <br>
+                    <p class="name-error error"></p>
+                </label> 
+                <label for="surename"> Pavarde: <br>
+                    <input id="input-surename" type="text" name="surename" required> <br>
+                    <p class="surename-error error"></p>
+                </label>
+                <label for="account"> Saskaitos Numeris: <br>
+                    <input type="text" name="account" value="<?=generateIban()?>" readonly required><br>
+                </label>
+                <label for="user-nr"> Asmens kodas:  <br>
+                    <input id="input-id" type="number" name="user-nr" value="<?=generateID()?>" required><br>
+                    <p class="id-error error"></p>
+                </label>
+                <button type="submit">Prideti</button>
+            </form>
+
+            <div class="line"></div>
+
+            <div class="menu">
+                <a href="/grazus/bankas/saskaitu-sarasas.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
+                <a href="/grazus/bankas/login.php?logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
+            </div>
+
+        </div>
+
+        <div class="lock">
+            <div class="lock-box">
+                 <i class="icon-user"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+
 </body>
 </html>
