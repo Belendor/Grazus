@@ -1,0 +1,16 @@
+{
+    "name": "belendor/composer",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "App\\DB\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "gelborn",
+            "email": "dwarf11@gmail.com"
+        }
+    ],
+    "require": {}
+}
