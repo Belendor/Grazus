@@ -100,7 +100,6 @@ class Grybas {
     }
 }
 
-
 class Krepsys{
 
     public $grybai = [];
@@ -123,8 +122,6 @@ while($krepsys->svoris < 500){
 }
 
 _dc($krepsys->grybai);
-
-
 
 
 // 4.
