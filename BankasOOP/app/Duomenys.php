@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-include 'DataBase.php';
 
+include 'DataBase.php';
 
 class Duomenys implements DB\DataBase {
 

@@ -1,6 +1,7 @@
 <?php
+
 namespace App\DB;
- 
+
 interface DataBase
 {
     function create(array $userData) : void;
