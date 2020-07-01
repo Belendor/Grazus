@@ -7,8 +7,8 @@
 
     <title>Login</title>
 
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./../public/css/reset.css">
+    <link rel="stylesheet" href="./../public/css/main.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 </head>

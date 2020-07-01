@@ -2,18 +2,19 @@
 
 namespace App;
 
-include 'DataBase.php';
+use App\Database;
 
-class Duomenys implements DB\DataBase {
+
+class Duomenys implements DataBase {
 
         public function __construct(){
 
         }
 
         public function create(array $userData) : void {
-            $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+            $data = json_decode(file_get_contents('./../db/data.json'),1);
             $data[] = $userData;
-            file_put_contents(__DIR__ .'/data.json', json_encode($data));
+            file_put_contents('./../db/data.json', json_encode($data));
         }
 
         public function update(int $userId, array $userData) : void{

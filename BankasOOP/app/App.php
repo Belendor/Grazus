@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+use App\Saskaita;
+use App\Login;
 
 class App{
     public $URI = '/grazus/BankasOOP/public/';
@@ -17,29 +19,43 @@ class App{
 
         $params = explode('/', $params);
 
-        _dc($params);
-
         if(count($params) == 1){
             if($params[0] == 'saskaita'){
                 require('./../view/saskaita.php');
-            }
-            if($params[0] == 'loging'){
+            }elseif($params[0] == 'loging'){
 
-                if(new Login()){
+                if(Login::login()){
+
                     header('Location: /grazus/BankasOOP/public/saskaita');
                     die();
 
-                }else{
-
                 }
-            }
-            if($params[0] == 'login'){
+
+            }elseif($params[0] == 'login'){
 
                 require('./../view/login.php');
 
+            }elseif($params[0] == 'add'){
+
+                Saskaita::add();
+
+                header('Location: /grazus/BankasOOP/public/saskaita');
+                die();
+
+            }else{ // defaul redirect 
+
+                header('Location: /grazus/BankasOOP/public/saskaita');
+                die();
             }
+
+        }elseif(count($params) == 2){ 
+            if($params[0] == 'login' && $params[1] == 'logout'){
+                Login::logout();
+            }
+            
+        }else{ // defaul redirect
+            header('Location: /grazus/BankasOOP/public/saskaita');
+            die();
         }
-
-
     }
 }
