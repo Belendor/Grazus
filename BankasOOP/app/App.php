@@ -5,7 +5,10 @@ use App\Saskaita;
 use App\Login;
 
 class App{
-    public static $URI = '/grazus/BankasOOP/public/';
+
+    public $URI = '/grazus/BankasOOP/public/';
+
+    public static $user = '';
 
     function __construct(){
         $this->start();
@@ -20,7 +23,9 @@ class App{
 
         if(count($params) == 1){
             if($params[0] == 'saskaita'){
+
                 require('./../view/saskaita.php');
+                
             }elseif($params[0] == 'loging'){
 
                 if(Login::login()){
@@ -47,18 +52,39 @@ class App{
 
             }else{ // defaul redirect 
 
-                header('Location: /grazus/BankasOOP/public/saskaita');
-                die();
             }
 
         }elseif(count($params) == 2){ 
             if($params[0] == 'login' && $params[1] == 'logout'){
                 Login::logout();
             }
+
+            if($params[0] == 'delete'){
+
+                Saskaita::remove($params[1]);
+
+                header('Location: /grazus/BankasOOP/public/sarasas');
+                die();
+            }
+
+            if($params[0] == 'add'){
+
+                if(!empty($_POST)){
+
+                    Saskaita::sum();
+
+                    header('Location: /grazus/BankasOOP/public/add/'.$params[1]);
+                    die();
+
+                }else{
+                    App::$user = $params[1];
+    
+                    require('./../view/prideti.php');
+                }
+            }
             
         }else{ // defaul redirect
-            header('Location: /grazus/BankasOOP/public/saskaita');
-            die();
+
         }
     }
 }

@@ -20,34 +20,45 @@ class Duomenys implements DataBase {
         }
 
         public function update(int $userId, array $userData) : void{
-            $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
 
             foreach($data as $key => $user){
-                if($userId == $data[$key]['user-nr']){
+                if($userId == $data[$key]['id']){
                     $data[$key] = $userData;
                 }
             }
-            file_put_contents(__DIR__ .'/data.json', json_encode($data));
+            file_put_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json', json_encode($data));
         }
 
         public function delete(int $userId) : void{
-            $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+
+            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
 
             foreach($data as $key => $user){
-                if($userId == $data[$key]['user-nr']){
+                if($userId == $data[$key]['id']){
                     array_splice($data, $key, 1);
                 }
             }
 
-            file_put_contents(__DIR__ .'/data.json', json_encode($data));
+            file_put_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json', json_encode($data));
         }
 
         public function show(int $userId) : array{
 
-            $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
+
+
 
             foreach($data as $key => $user){
-                if($userId == $data[$key]['user-nr']){
+
+                _d("foreach");
+                _d($userId);
+                _d($user['id']);
+
+                if($userId == $user['id']){
+                    _d('returning');
+                    _d($data[$key]);
+
                     return  $data[$key];
                 }
             }

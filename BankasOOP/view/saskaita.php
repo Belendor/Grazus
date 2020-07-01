@@ -45,7 +45,7 @@ use App\GeneratorForm;
             <div class="line"></div>
 
             <div class="menu">
-                <a href="/saskaitu-sarasas.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
+                <a href="./../public/sarasas">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
                 <a href="./../public/login/logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
             </div>
 

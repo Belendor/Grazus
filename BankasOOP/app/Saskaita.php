@@ -16,27 +16,62 @@ class Saskaita {
             'id' => $_POST['id'],
             'lesos' => 0
         ];
-    
-        $duomenys = new Duomenys;
 
+        $duomenys = new Duomenys;
         $duomenys->create($newObject);
 
         }
     }
 
     public static function validateId(){
-
         $duomenys = new Duomenys;
         $data = $duomenys->showAll();
 
         foreach($data as $value){
 
-            if($value['user-nr'] == $_POST['user-nr']){
+            if($value['id'] == $_POST['id']){
             
                 $uniqueId = false;
             }
         }
 
         return true;
+    }
+
+    public static function remove($id){
+
+        $duomenys = new Duomenys;
+        $duomenys->delete($id);
+
+    }
+
+    public static function sum(){
+
+       
+        if(!empty($_POST)){
+            $duomenys = new Duomenys;
+
+            $user = $duomenys->show($_POST['id'] );
+
+            $user['lesos'] += $_POST['sum'];
+    
+            $duomenys->update($_POST['id'], $user);
+    
+        }
+    }
+
+    public static function minus(){
+
+       
+        if(!empty($_POST)){
+            $duomenys = new Duomenys;
+
+            $user = $duomenys->show($_POST['id'] );
+
+            $user['lesos'] -= $_POST['sum'];
+    
+            $duomenys->update($_POST['id'], $user);
+    
+        }
     }
 }

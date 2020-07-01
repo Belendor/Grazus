@@ -8,17 +8,28 @@ $table = '';
 
 foreach($data as $value){
 
-    $prideti = '<form action="/prideti-lesas.php" method="post">
-            <input type="hidden" name="id" value="'.$value['id'].'">
-            <button style="background-color: green" type="submit">Prideti Lesas</button>
-            </form>';
+    $delete = '<a href="./../public/delete/'.$value['id'].'">Istrinti</a>';
+    $add = '<a href="./../public/add/'.$value['id'].'">Prideti</a>';
+    $reduce = '<a href="./../public/reduce/'.$value['id'].'">Nuimti</a>';
+
+
+    
+    // $add = '<form action="./../public/add/" method="post">
+    //         <input type="hidden" name="id" value="'.$value['id'].'">
+    //         <button style="background-color: green" type="submit">Prideti Lesas</button>
+    //         </form>';
+            
+    // $reduce = '<form action="./../public/reduce/" method="post">
+    //         <input type="hidden" name="id" value="'.$value['id'].'">
+    //         <button style="background-color: orange" type="submit">Nurasyti Lesas</button>
+    //         </form>';
 
     $row = "<tr>
             <td>".$value['name']."</td>
             <td>".$value['surename']."</td>
             <td>".$value['account']."</td>
             <td>".$value['id']."</td>
-            <td> $prideti </td>
+            <td> $delete | $add | $reduce </td>
             </tr>";
 
     $table .= $row;
@@ -110,8 +121,8 @@ foreach($data as $value){
     </div>
 
     <div class="menu">
-        <a href="./saskaita.php">Sukurti nauja saskaita</a><br>
-        <a href="./login.php?logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
+        <a href="./../public/saskaita">Sukurti nauja saskaita</a><br>
+        <a href="./../public/login/logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
     </div>   
 
 </body>
