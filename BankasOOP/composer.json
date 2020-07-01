@@ -3,7 +3,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app",
-            "App\\DB\\": "app"
+            "App\\DB\\": "app/db"
         }
     },
     "authors": [

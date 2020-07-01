@@ -1,12 +1,13 @@
 <?php
 namespace App;
 
-use App\Duomenys;
+use App\DB\Duomenys;
 
 class Saskaita {
+
     public static function add(){
 
-        if(!empty($_POST)){
+        if(!empty($_POST) && self::validateId()){
     
         $newObject = [
             'name'=> $_POST['name'],
@@ -19,6 +20,23 @@ class Saskaita {
         $duomenys = new Duomenys;
 
         $duomenys->create($newObject);
+
         }
+    }
+
+    public static function validateId(){
+
+        $duomenys = new Duomenys;
+        $data = $duomenys->showAll();
+
+        foreach($data as $value){
+
+            if($value['user-nr'] == $_POST['user-nr']){
+            
+                $uniqueId = false;
+            }
+        }
+
+        return true;
     }
 }

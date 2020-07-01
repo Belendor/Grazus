@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\DB;
 
-use App\Database;
+use App\DB\DataBase;
 
 
 class Duomenys implements DataBase {
@@ -12,9 +12,11 @@ class Duomenys implements DataBase {
         }
 
         public function create(array $userData) : void {
+
             $data = json_decode(file_get_contents('./../db/data.json'),1);
             $data[] = $userData;
             file_put_contents('./../db/data.json', json_encode($data));
+
         }
 
         public function update(int $userId, array $userData) : void{
@@ -52,8 +54,10 @@ class Duomenys implements DataBase {
         }
 
         public function showAll() : array{
-            $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+            
+            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
             return $data;
+
         }
 
 }

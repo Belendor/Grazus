@@ -25,18 +25,18 @@ use App\GeneratorForm;
             
             <form action="/grazus/BankasOOP/public/add" method="post">
                 <label for="name"> Vardas: <br>
-                    <input id="input-name" type="text" name="name" required> <br>
+                    <input id="input-name" type="text" name="name" value="<?=GeneratorForm::generateName()?>" required> <br>
                     <p class="name-error error"></p>
                 </label> 
                 <label for="surename"> Pavarde: <br>
-                    <input id="input-surename" type="text" name="surename" required> <br>
+                    <input id="input-surename" type="text" name="surename" value="<?=GeneratorForm::generateName()?>" required> <br>
                     <p class="surename-error error"></p>
                 </label>
                 <label for="account"> Saskaitos Numeris: <br>
                     <input type="text" name="account" readonly value="<?=GeneratorForm::generateIban()?>"  required><br>
                 </label>
                 <label for="user-nr"> Asmens kodas:  <br>
-                    <input id="input-id" type="number" name="id" value="" required><br>
+                    <input id="input-id" type="number" name="id" value="<?=GeneratorForm::generateId()?>" required><br>
                     <p class="id-error error"></p>
                 </label>
                 <button type="submit">Prideti</button>

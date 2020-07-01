@@ -5,7 +5,7 @@ use App\Saskaita;
 use App\Login;
 
 class App{
-    public $URI = '/grazus/BankasOOP/public/';
+    public static $URI = '/grazus/BankasOOP/public/';
 
     function __construct(){
         $this->start();
@@ -13,7 +13,6 @@ class App{
 
     public function start (){
         session_start();
-
 
         $params = str_replace($this->URI, '', $_SERVER['REQUEST_URI']); //   /grazus/BankasOOP/public/
 
@@ -41,6 +40,10 @@ class App{
 
                 header('Location: /grazus/BankasOOP/public/saskaita');
                 die();
+
+            }elseif($params[0] == 'sarasas'){
+
+                require('./../view/sarasas.php');
 
             }else{ // defaul redirect 
 
