@@ -68,7 +68,7 @@ class Saskaita {
 
             $user = $duomenys->show($_POST['id'] );
 
-            $user['lesos'] -= $_POST['sum'];
+            $user['lesos'] -= $_POST['minus'];
     
             $duomenys->update($_POST['id'], $user);
     

@@ -7,10 +7,10 @@ $duomenys = new Duomenys;
 $user = $duomenys->show(App::$user);
 
 
-$input = '<form action="./../add/'.App::$user.'" method="post">
-        <input type="number" name="sum" min="0">
+$input = '<form action="./../minus/'.App::$user.'" method="post">
+        <input type="number" name="minus" min="0">
         <input type="hidden" name="id" value="'.$user['id'].'">
-        <button type="submit">Prideti Lesas</button>
+        <button type="submit">Atimti Lesas</button>
         </form>';
 
 

@@ -10,7 +10,7 @@ foreach($data as $value){
 
     $delete = '<a href="./../public/delete/'.$value['id'].'">Istrinti</a>';
     $add = '<a href="./../public/add/'.$value['id'].'">Prideti</a>';
-    $reduce = '<a href="./../public/reduce/'.$value['id'].'">Nuimti</a>';
+    $minus = '<a href="./../public/minus/'.$value['id'].'">Nuimti</a>';
 
 
     
@@ -19,7 +19,7 @@ foreach($data as $value){
     //         <button style="background-color: green" type="submit">Prideti Lesas</button>
     //         </form>';
             
-    // $reduce = '<form action="./../public/reduce/" method="post">
+    // $minus = '<form action="./../public/minus/" method="post">
     //         <input type="hidden" name="id" value="'.$value['id'].'">
     //         <button style="background-color: orange" type="submit">Nurasyti Lesas</button>
     //         </form>';
@@ -29,7 +29,7 @@ foreach($data as $value){
             <td>".$value['surename']."</td>
             <td>".$value['account']."</td>
             <td>".$value['id']."</td>
-            <td> $delete | $add | $reduce </td>
+            <td> $delete | $add | $minus </td>
             </tr>";
 
     $table .= $row;

@@ -51,13 +51,7 @@ class Duomenys implements DataBase {
 
             foreach($data as $key => $user){
 
-                _d("foreach");
-                _d($userId);
-                _d($user['id']);
-
                 if($userId == $user['id']){
-                    _d('returning');
-                    _d($data[$key]);
 
                     return  $data[$key];
                 }

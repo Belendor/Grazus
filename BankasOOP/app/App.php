@@ -82,6 +82,22 @@ class App{
                     require('./../view/prideti.php');
                 }
             }
+
+            if($params[0] == 'minus'){
+
+                if(!empty($_POST)){
+
+                    Saskaita::minus();
+
+                    header('Location: /grazus/BankasOOP/public/minus/'.$params[1]);
+                    die();
+
+                }else{
+                    App::$user = $params[1];
+    
+                    require('./../view/atimti.php');
+                }
+            }
             
         }else{ // defaul redirect
 
