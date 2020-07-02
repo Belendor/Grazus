@@ -52,6 +52,9 @@ class App{
 
             }else{ // defaul redirect 
 
+                header('Location: /grazus/BankasOOP/public/login');
+                die();
+
             }
 
         }elseif(count($params) == 2){ 
@@ -81,6 +84,13 @@ class App{
     
                     require('./../view/prideti.php');
                 }
+            }
+
+            if($params[0] == 'change'){
+
+                    App::$user = $params[1];
+                    require('./../view/keisti.php');
+
             }
 
             if($params[0] == 'minus'){

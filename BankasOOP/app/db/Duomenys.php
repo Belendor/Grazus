@@ -47,8 +47,6 @@ class Duomenys implements DataBase {
 
             $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
 
-
-
             foreach($data as $key => $user){
 
                 if($userId == $user['id']){
@@ -61,8 +59,42 @@ class Duomenys implements DataBase {
         public function showAll() : array{
             
             $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
-            return $data;
 
+            $sorted = $this->sort($data);
+
+            return $sorted;
+
+        }
+
+        private function sort(array $userData) {
+
+            function bubleSort($array){
+                $swapped;
+                do{
+                    $swapped = false;
+                    for($i = 0; $i < count($array) - 1; $i++){
+            
+                        //------------------------------------------
+                        // Irasyti kokias arejaus reiksmes lyginti
+                        //------------------------------------------
+            
+                        $firstElement = strnatcmp($array[$i]['surename'], $array[$i+1]['surename']);
+                        $secondElement = strnatcmp($array[$i+1]['surename'], $array[$i]['surename']);
+                        // -----------------------------------------
+            
+            
+                        if($firstElement > $secondElement){ // '>' Didejimo tvarka, '<' Mazejimo tvarka.
+                            $temp = $array[$i];
+                            $array[$i] = $array[$i + 1];
+                            $array[$i + 1] = $temp;
+                            $swapped = true;
+                        }
+                    }
+                }while($swapped);
+                return $array;
+            }
+
+            return bubleSort($userData);
         }
 
 }

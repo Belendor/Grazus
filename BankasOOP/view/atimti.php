@@ -7,19 +7,25 @@ $duomenys = new Duomenys;
 $user = $duomenys->show(App::$user);
 
 
-$input = '<form action="./../minus/'.App::$user.'" method="post">
-        <input type="number" name="minus" min="0">
-        <input type="hidden" name="id" value="'.$user['id'].'">
-        <button type="submit">Atimti Lesas</button>
-        </form>';
 
+$select = "<select name=\"currency\">
+        <option name=\"eur-input\" value=\"eur\">EUR</option>
+        <option name=\"usd-input\" value=\"usd\">USD</option>
+        </select>";
+
+$input = '<form action="./../minus/'.App::$user.'" method="post">
+        <input type="number" name="sum" min="0">  '.$select.'
+        <input type="hidden" name="id" value="'.$user['id'].'">
+        <button type="submit">Atimnti Lesas</button>
+        </form>';
 
 $renderRow = '<tr>
             <td>'.$user['name'].'</td>
             <td>'.$user['surename'].'</td>
             <td>'.$user['account'].'</td>
             <td>'.$user['id'].'</td>
-            <td>'.$user['lesos'].'</td>
+            <td>'.$user['eur'].'</td>
+            <td>'.$user['usd'].'</td>
             <td>'.$input.'</td>
             </tr>';
 
@@ -100,8 +106,9 @@ if(isset($_SESSION['note'])){
         <th>Pavarde</th> 
         <th>Saskaita</th>
         <th>Asmens kodas</th>
-        <th>Lesos</th>
-        <th>Kokia suma prideti?</th>
+        <th>Eurai</th>
+        <th>Doleriai</th>
+        <th>Kokia suma atimti?</th>
 
         <?=$renderRow ?? '' ?>
 

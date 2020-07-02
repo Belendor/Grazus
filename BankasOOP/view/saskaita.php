@@ -20,6 +20,17 @@ use App\GeneratorForm;
     <div class="container">
         <div class="form">
             <h1>Nauja Saskaita</h1>
+            
+            <p class="message <?=$errorColor?> "><?php  
+        
+                if(isset($_SESSION['note'])) {
+                
+                    echo $_SESSION['note']['text'];
+                    unset($_SESSION['note']);
+                    
+                }
+
+            ?></p><br>
 
             <div class="line"></div>
             

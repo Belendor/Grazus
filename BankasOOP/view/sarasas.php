@@ -11,29 +11,17 @@ foreach($data as $value){
     $delete = '<a href="./../public/delete/'.$value['id'].'">Istrinti</a>';
     $add = '<a href="./../public/add/'.$value['id'].'">Prideti</a>';
     $minus = '<a href="./../public/minus/'.$value['id'].'">Nuimti</a>';
-
-
-    
-    // $add = '<form action="./../public/add/" method="post">
-    //         <input type="hidden" name="id" value="'.$value['id'].'">
-    //         <button style="background-color: green" type="submit">Prideti Lesas</button>
-    //         </form>';
-            
-    // $minus = '<form action="./../public/minus/" method="post">
-    //         <input type="hidden" name="id" value="'.$value['id'].'">
-    //         <button style="background-color: orange" type="submit">Nurasyti Lesas</button>
-    //         </form>';
+    $change = '<a href="./../public/change/'.$value['id'].'">Keisti valiuta</a>';
 
     $row = "<tr>
             <td>".$value['name']."</td>
             <td>".$value['surename']."</td>
             <td>".$value['account']."</td>
             <td>".$value['id']."</td>
-            <td> $delete | $add | $minus </td>
+            <td> $delete | $add | $minus | $change </td>
             </tr>";
 
     $table .= $row;
-
 }
 
 ?>

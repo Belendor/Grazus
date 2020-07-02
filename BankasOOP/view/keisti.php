@@ -7,15 +7,20 @@ $duomenys = new Duomenys;
 $user = $duomenys->show(App::$user);
 
 
-$select = "<select name=\"currency\">
+$select = "<select name=\"currency1\">
         <option name=\"eur-input\" value=\"eur\">EUR</option>
         <option name=\"usd-input\" value=\"usd\">USD</option>
         </select>";
 
-$input = '<form action="./../add/'.App::$user.'" method="post">
-        <input type="number" name="sum" min="0">  '.$select.'
+$select2 = "<select name=\"currency2\">
+        <option name=\"eur-input\" value=\"eur\">EUR</option>
+        <option name=\"usd-input\" value=\"usd\">USD</option>
+        </select>";
+
+$input = '<form action="./../change/'.App::$user.'" method="post">
+        Iš '.$select.'  <input type="number" name="sum" min="0"> į   '.$select2.'
         <input type="hidden" name="id" value="'.$user['id'].'">
-        <button type="submit">Prideti Lesas</button>
+        <button type="submit">Konvertuoti Lesas</button>
         </form>';
 
 
@@ -108,7 +113,7 @@ if(isset($_SESSION['note'])){
         <th>Asmens kodas</th>
         <th>Eurai</th>
         <th>Doleriai</th>
-        <th>Kokia suma prideti?</th>
+        <th>Ka norite keisti</th>
 
         <?=$renderRow ?? '' ?>
 

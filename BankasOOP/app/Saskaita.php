@@ -14,7 +14,8 @@ class Saskaita {
             'surename' => $_POST['surename'],
             'account' => $_POST['account'],
             'id' => $_POST['id'],
-            'lesos' => 0
+            'eur' => 0,
+            'usd' => 0
         ];
 
         $duomenys = new Duomenys;
@@ -47,15 +48,27 @@ class Saskaita {
 
     public static function sum(){
 
-       
         if(!empty($_POST)){
             $duomenys = new Duomenys;
 
             $user = $duomenys->show($_POST['id'] );
 
-            $user['lesos'] += $_POST['sum'];
-    
-            $duomenys->update($_POST['id'], $user);
+            if($_POST['currency'] == 'eur'){
+
+                $user['eur'] += $_POST['sum'];
+        
+                $duomenys->update($_POST['id'], $user);
+
+            }
+
+            if($_POST['currency'] == 'usd'){
+
+                $user['usd'] += $_POST['sum'];
+        
+                $duomenys->update($_POST['id'], $user);
+
+            }
+
     
         }
     }
@@ -68,9 +81,21 @@ class Saskaita {
 
             $user = $duomenys->show($_POST['id'] );
 
-            $user['lesos'] -= $_POST['minus'];
-    
-            $duomenys->update($_POST['id'], $user);
+            if($_POST['currency'] == 'eur'){
+
+                $user['eur'] -= $_POST['sum'];
+        
+                $duomenys->update($_POST['id'], $user);
+
+            }
+
+            if($_POST['currency'] == 'usd'){
+
+                $user['usd'] -= $_POST['sum'];
+        
+                $duomenys->update($_POST['id'], $user);
+
+            }
     
         }
     }
