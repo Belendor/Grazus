@@ -1,28 +1,21 @@
-<?php
+<?php use App\Db\Duomenys; use App\App; use App\Change;
+$duomenys = new Duomenys; $user = $duomenys->show(App::$user);
 
-use App\Db\Duomenys;
-use App\App;
-
-$duomenys = new Duomenys;
-$user = $duomenys->show(App::$user);
-
-
-$select = "<select name=\"currency1\">
+$select = "<select id=\"select1\" name=\"currency1\">
         <option name=\"eur-input\" value=\"eur\">EUR</option>
         <option name=\"usd-input\" value=\"usd\">USD</option>
         </select>";
 
-$select2 = "<select name=\"currency2\">
+$select2 = "<select id=\"select2\" name=\"currency2\">
         <option name=\"eur-input\" value=\"eur\">EUR</option>
         <option name=\"usd-input\" value=\"usd\">USD</option>
         </select>";
 
-$input = '<form action="./../change/'.App::$user.'" method="post">
-        Iš '.$select.'  <input type="number" name="sum" min="0"> į   '.$select2.'
+$input = '<form action="./../change/'.App::$user.'" method="post" id="form">
+        Iš '.$select.'  <input id="form-input" type="number" step="0.01" name="sum" min="0" required> į   '.$select2.'
         <input type="hidden" name="id" value="'.$user['id'].'">
-        <button type="submit">Konvertuoti Lesas</button>
+        <button id="submit" type="submit">Konvertuoti Lesas</button>
         </form>';
-
 
 $renderRow = '<tr>
             <td>'.$user['name'].'</td>
@@ -33,7 +26,6 @@ $renderRow = '<tr>
             <td>'.$user['usd'].'</td>
             <td>'.$input.'</td>
             </tr>';
-
 
 if(isset($_SESSION['note'])){
     if($_SESSION['note']['message'] == 'message'){
@@ -48,52 +40,19 @@ if(isset($_SESSION['note'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <style>
-
-        td, th {
-        border: 1px solid #ddd;
-        padding: 8px;
-        }
-
-        tr:nth-child(even){background-color: #f2f2f2;}
-
-        tr:hover {background-color: #ddd;}
-
-        th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #0092E1;
-        color: white;
-        }
-        .menu{
-            display: inline-block;
-            padding: 5px 0;
-        }
-
-        a{
-            font-family: 'SEB Sans Serif';
-            text-decoration: unset;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .red{
-            background-color: rgba(201, 63, 63, 0.74);
-        }
-
-        .green{
-            background-color: rgba(35, 173, 35, 0.74);
-        }
-
-    </style> 
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nurasyti lesas</title>
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/keisti.css">
 </head>
 <body>
+
+    <div class="alert-box">
+        <div class="message-box"></div><br>
+        <button class="alert-button">Sutinku</button>
+        <button class="alert-decline">Nesutinku</button>
+    </div>
 
     <p class="<?=$errorColor?> "><?php  
         
@@ -105,6 +64,10 @@ if(isset($_SESSION['note'])){
         }
 
     ?></p><br>
+
+    <div>
+        Valiutu kursai: 1 EUR = <span id="EURtoUSD"><?=Change::getEURtoUSD()?></span>  USD, 1 USD = <span id="USDtoEUR"><?=Change::getUSDtoEUR()?></span> EUR. Duomenys atnaujinti prie <?=time() - $_SESSION["USDtoEUR"]["timestamp"] ?> sekundziu.
+    </div>
 
     <table style="width:100%">
         <th>Vardas</th>
@@ -124,5 +87,7 @@ if(isset($_SESSION['note'])){
         <a href="./../sarasas">Perziureti saskaitu sarasa</a><br>
         <a href="./../login/logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
     </div>
+
+    <script src="./../js/keisti.js"></script>
 </body>
 </html>

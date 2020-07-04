@@ -23,7 +23,6 @@ class Saskaita {
 
         }
     }
-
     public static function validateId(){
         $duomenys = new Duomenys;
         $data = $duomenys->showAll();
@@ -38,14 +37,12 @@ class Saskaita {
 
         return true;
     }
-
     public static function remove($id){
 
         $duomenys = new Duomenys;
         $duomenys->delete($id);
 
     }
-
     public static function sum(){
 
         if(!empty($_POST)){
@@ -68,11 +65,9 @@ class Saskaita {
                 $duomenys->update($_POST['id'], $user);
 
             }
-
     
         }
     }
-
     public static function minus(){
 
        

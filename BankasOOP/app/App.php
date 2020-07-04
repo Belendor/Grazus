@@ -88,9 +88,19 @@ class App{
 
             if($params[0] == 'change'){
 
+                if(!empty($_POST)){
+
+                    Change::convert($params[1]);
+
+                    header('Location: /grazus/BankasOOP/public/change/'.$params[1]);
+                    die();
+
+                }else{
+
                     App::$user = $params[1];
                     require('./../view/keisti.php');
 
+                }
             }
 
             if($params[0] == 'minus'){

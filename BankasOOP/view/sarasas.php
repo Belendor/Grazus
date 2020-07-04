@@ -24,6 +24,7 @@ foreach($data as $value){
     $table .= $row;
 }
 
+
 ?>
 
 <!DOCTYPE html>
