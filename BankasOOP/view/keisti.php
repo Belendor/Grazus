@@ -14,7 +14,7 @@ $select2 = "<select id=\"select2\" name=\"currency2\">
 $input = '<form action="./../change/'.App::$user.'" method="post" id="form">
         Iš '.$select.'  <input id="form-input" type="number" step="0.01" name="sum" min="0" required> į   '.$select2.'
         <input type="hidden" name="id" value="'.$user['id'].'">
-        <button id="submit" type="submit">Konvertuoti Lesas</button>
+        <button id="submit" type="submit">Keisiti</button>
         </form>';
 
 $renderRow = '<tr>
@@ -44,9 +44,18 @@ if(isset($_SESSION['note'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nurasyti lesas</title>
     <link rel="stylesheet" href="./../css/reset.css">
-    <link rel="stylesheet" href="./../css/keisti.css">
+    <link rel="stylesheet" href="./../css/keisti.css">    
+    <link rel="stylesheet" href="./../css/nav.css">
+    <link rel="stylesheet" href="./../css/table.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
+
+    <div class="navBar">    
+        <a class="navButton logout" href="./../login/logout">Atsijungti <i class="icon-signout text-icon"></i> </a>
+        <a class="navButton" href="./../saskaita">Nauja saskaita <i class="icon-file-text-alt"></i></a>
+        <a class="navButton" href="./../sarasas">Saskaitu sarasa <i class="icon-list"></i></a>
+    </div>
 
     <div class="alert-box">
         <div class="message-box"></div><br>
@@ -65,8 +74,10 @@ if(isset($_SESSION['note'])){
 
     ?></p><br>
 
-    <div>
-        Valiutu kursai: 1 EUR = <span id="EURtoUSD"><?=Change::getEURtoUSD()?></span>  USD, 1 USD = <span id="USDtoEUR"><?=Change::getUSDtoEUR()?></span> EUR. Duomenys atnaujinti prie <?=time() - $_SESSION["USDtoEUR"]["timestamp"] ?> sekundziu.
+    <div class="change-box">
+        <p><img class="usd" src="https://www.seekpng.com/png/full/836-8364774_euro-flag-round-europe-flag.png" alt="EUR">1 EUR = <span id="EURtoUSD"><?=number_format(Change::getEURtoUSD(), 4)?></span>  USD <img  src="http://yachtregistration.net/wp-content/uploads/2019/07/united_states_of_america_640.png" alt="USD"></p> 
+        <p><img  src="http://yachtregistration.net/wp-content/uploads/2019/07/united_states_of_america_640.png" alt="USD">1 USD = <span id="USDtoEUR"><?=number_format(Change::getUSDtoEUR(), 4)?></span>  EUR <img class="usd" src="https://www.seekpng.com/png/full/836-8364774_euro-flag-round-europe-flag.png" alt="EUR"></p>
+        <p>Duomenys atnaujinti pries <?=time() - $_SESSION["USDtoEUR"]["timestamp"] ?> sekundziu</p>
     </div>
 
     <table style="width:100%">
@@ -81,12 +92,6 @@ if(isset($_SESSION['note'])){
         <?=$renderRow ?? '' ?>
 
     </table>
-
-    <div class="menu">
-        <a href="./../saskaita">Sukurti nauja saskaita</a><br>
-        <a href="./../sarasas">Perziureti saskaitu sarasa</a><br>
-        <a href="./../login/logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
-    </div>
 
     <script src="./../js/keisti.js"></script>
 </body>

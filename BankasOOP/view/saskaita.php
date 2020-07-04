@@ -11,11 +11,16 @@ use App\GeneratorForm;
 
     <link rel="stylesheet" href="./../public/css/reset.css">
     <link rel="stylesheet" href="./../public/css/main.css">
-
+    <link rel="stylesheet" href="./../public/css/nav.css"> 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 </head>
 <body>
+
+    <div class="navBar">    
+        <a class="navButton logout" href="./../public/login/logout">Atsijungti <i class="icon-signout text-icon"></i></a>
+        <a class="navButton" href="./../public/sarasas">Saskaitu sarasa <i class="icon-list"></i></a>
+    </div>
 
     <div class="container">
         <div class="form">
@@ -52,13 +57,6 @@ use App\GeneratorForm;
                 </label>
                 <button type="submit">Prideti</button>
             </form>
-
-            <div class="line"></div>
-
-            <div class="menu">
-                <a href="./../public/sarasas">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
-                <a href="./../public/login/logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br>
-            </div>
 
         </div>
 

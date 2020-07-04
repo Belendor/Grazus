@@ -1,0 +1,42 @@
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            }
+    
+            tr:nth-child(even){background-color: #f2f2f2;}
+    
+            tr:hover {background-color: #ddd;}
+    
+            th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #0092E1;
+            color: white;
+            }
+    
+            button{
+                width: 110px;
+                margin-bottom: 2px;
+                cursor: pointer;    
+            }
+            .menu{
+                display: inline-block;
+                padding: 5px 0;
+            }
+    
+            a{
+                font-family: 'SEB Sans Serif';
+                text-decoration: unset;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+    
+            .red{
+                background-color: rgba(201, 63, 63, 0.74);
+            }
+    
+            .green{
+                background-color: rgba(35, 173, 35, 0.74);
+            }
