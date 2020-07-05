@@ -1,8 +1,4 @@
-<?php
-
-namespace App;
-use App\Saskaita;
-use App\Login;
+<?php namespace App; use App\Saskaita; use App\Login;
 
 class App{
 
@@ -21,8 +17,9 @@ class App{
 
         $params = explode('/', $params);
 
+
         if(count($params) == 1){
-            if($params[0] == 'saskaita'){
+            if($params[0] == 'saskaita' && isset($_SESSION['login'])){
 
                 require('./../view/saskaita.php');
                 
@@ -36,17 +33,17 @@ class App{
                 }
 
             }elseif($params[0] == 'login'){
-
+                
                 require('./../view/login.php');
 
-            }elseif($params[0] == 'add'){
+            }elseif($params[0] == 'add' && isset($_SESSION['login'])){
 
                 Saskaita::add();
 
                 header('Location: /grazus/BankasOOP/public/saskaita');
                 die();
 
-            }elseif($params[0] == 'sarasas'){
+            }elseif($params[0] == 'sarasas' && isset($_SESSION['login'])){
 
                 require('./../view/sarasas.php');
 
@@ -62,7 +59,7 @@ class App{
                 Login::logout();
             }
 
-            if($params[0] == 'delete'){
+            if($params[0] == 'delete' && isset($_SESSION['login'])){
 
                 Saskaita::remove($params[1]);
 
@@ -70,7 +67,7 @@ class App{
                 die();
             }
 
-            if($params[0] == 'add'){
+            if($params[0] == 'add' && isset($_SESSION['login'])){
 
                 if(!empty($_POST)){
 
@@ -86,7 +83,7 @@ class App{
                 }
             }
 
-            if($params[0] == 'change'){
+            if($params[0] == 'change' && isset($_SESSION['login'])){
 
                 if(!empty($_POST)){
 
@@ -103,7 +100,7 @@ class App{
                 }
             }
 
-            if($params[0] == 'minus'){
+            if($params[0] == 'minus' && isset($_SESSION['login'])){
 
                 if(!empty($_POST)){
 

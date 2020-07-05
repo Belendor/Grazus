@@ -16,7 +16,7 @@ $select = "<select name=\"currency\">
 $input = '<form action="./../minus/'.App::$user.'" method="post">
         <input type="number" name="sum" min="0">  '.$select.'
         <input type="hidden" name="id" value="'.$user['id'].'">
-        <button type="submit">Atimnti Lesas</button>
+        <button id="submit" type="submit">Atimnti Lesas</button>
         </form>';
 
 $renderRow = '<tr>

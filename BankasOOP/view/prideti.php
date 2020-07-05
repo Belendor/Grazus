@@ -7,17 +7,18 @@ $duomenys = new Duomenys;
 $user = $duomenys->show(App::$user);
 
 
-$select = "<select name=\"currency\">
+$select = "<select id='select1' name=\"currency\">
         <option name=\"eur-input\" value=\"eur\">EUR</option>
         <option name=\"usd-input\" value=\"usd\">USD</option>
         </select>";
 
-$input = '<form action="./../add/'.App::$user.'" method="post">
-        <input type="number" name="sum" min="0">  '.$select.'
+$input = '<form id="form" action="./../add/'.App::$user.'" method="post">
+        <input type="number" name="sum" step="0.01" min="0">  '.$select.'
         <input type="hidden" name="id" value="'.$user['id'].'">
         <button type="submit">Prideti Lesas</button>
         </form>';
 
+$change = '<a id="change" style="color:black" href="./../change/'.App::$user.'">Keisti valiuta <i class="icon-usd"></i></a>';
 
 $renderRow = '<tr>
             <td>'.$user['name'].'</td>
@@ -26,7 +27,7 @@ $renderRow = '<tr>
             <td>'.$user['id'].'</td>
             <td>'.$user['eur'].'</td>
             <td>'.$user['usd'].'</td>
-            <td>'.$input.'</td>
+            <td><div class="edit">'.$input.$change.'</div></td>
             </tr>';
 
 
@@ -50,6 +51,7 @@ if(isset($_SESSION['note'])){
     <link rel="stylesheet" href="./../css/reset.css">    
     <link rel="stylesheet" href="./../css/nav.css">
     <link rel="stylesheet" href="./../css/table.css">
+    <link rel="stylesheet" href="./../css/forms.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>

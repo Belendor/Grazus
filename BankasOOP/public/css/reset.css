@@ -6,3 +6,18 @@ vertical-align: top;
 box-sizing: border-box;
 font-family: 'SEB Sans Serif'
 }
+
+button{
+    margin-left: 5px;
+    background-color: #0092E1;
+    border: none;
+    padding: 5px 2px;
+    margin-top: -5px;
+    color: white;
+    font-weight: 800;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #033047;
+}

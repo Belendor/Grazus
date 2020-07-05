@@ -1,5 +1,4 @@
-<?php
-use App\GeneratorForm;
+<?php use App\GeneratorForm; use App\FlashMessages;
 
 ?>
 <!DOCTYPE html>
@@ -26,16 +25,7 @@ use App\GeneratorForm;
         <div class="form">
             <h1>Nauja Saskaita</h1>
             
-            <p class="message <?=$errorColor?> "><?php  
-        
-                if(isset($_SESSION['note'])) {
-                
-                    echo $_SESSION['note']['text'];
-                    unset($_SESSION['note']);
-                    
-                }
-
-            ?></p><br>
+            <?=FlashMessages::message()?>
 
             <div class="line"></div>
             

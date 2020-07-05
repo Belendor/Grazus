@@ -1,4 +1,4 @@
-<?php use App\Db\Duomenys; use App\App; use App\Change;
+<?php use App\Db\Duomenys; use App\App; use App\Change; use App\FlashMessages;
 $duomenys = new Duomenys; $user = $duomenys->show(App::$user);
 
 $select = "<select id=\"select1\" name=\"currency1\">
@@ -58,27 +58,27 @@ if(isset($_SESSION['note'])){
     </div>
 
     <div class="alert-box">
-        <div class="message-box"></div><br>
-        <button class="alert-button">Sutinku</button>
-        <button class="alert-decline">Nesutinku</button>
+        <div class="inner-box"> 
+
+        <div class="message-box"></div>
+
+        <div>
+            <button class="alert-button">Sutinku</button>
+            <button class="alert-decline">Nesutinku</button>
+
+        </div>
+        </div>
+       
     </div>
 
-    <p class="<?=$errorColor?> "><?php  
-        
-        if(isset($_SESSION['note'])) {
-        
-            echo $_SESSION['note']['text'];
-            unset($_SESSION['note']);
-            
-        }
-
-    ?></p><br>
-
-    <div class="change-box">
-        <p><img class="usd" src="https://www.seekpng.com/png/full/836-8364774_euro-flag-round-europe-flag.png" alt="EUR">1 EUR = <span id="EURtoUSD"><?=number_format(Change::getEURtoUSD(), 4)?></span>  USD <img  src="http://yachtregistration.net/wp-content/uploads/2019/07/united_states_of_america_640.png" alt="USD"></p> 
-        <p><img  src="http://yachtregistration.net/wp-content/uploads/2019/07/united_states_of_america_640.png" alt="USD">1 USD = <span id="USDtoEUR"><?=number_format(Change::getUSDtoEUR(), 4)?></span>  EUR <img class="usd" src="https://www.seekpng.com/png/full/836-8364774_euro-flag-round-europe-flag.png" alt="EUR"></p>
-        <p>Duomenys atnaujinti pries <?=time() - $_SESSION["USDtoEUR"]["timestamp"] ?> sekundziu</p>
+    <div class="change-container">
+        <div class="change-box">
+            <p><img class="usd" src="https://www.seekpng.com/png/full/836-8364774_euro-flag-round-europe-flag.png" alt="EUR">1 EUR = <span id="EURtoUSD"><?=number_format(Change::getEURtoUSD(), 4)?></span>  USD <img  src="http://yachtregistration.net/wp-content/uploads/2019/07/united_states_of_america_640.png" alt="USD"></p> 
+            <p><img  src="http://yachtregistration.net/wp-content/uploads/2019/07/united_states_of_america_640.png" alt="USD">1 USD = <span id="USDtoEUR"><?=number_format(Change::getUSDtoEUR(), 4)?></span>  EUR <img class="usd" src="https://www.seekpng.com/png/full/836-8364774_euro-flag-round-europe-flag.png" alt="EUR"></p>
+            <p>Duomenys atnaujinti pries <?=time() - $_SESSION["USDtoEUR"]["timestamp"] ?> sekundziu</p>
+        </div>
     </div>
+    <?=FlashMessages::message()?>
 
     <table style="width:100%">
         <th>Vardas</th>

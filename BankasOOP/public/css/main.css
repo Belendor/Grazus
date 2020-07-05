@@ -48,7 +48,7 @@ input{
     align-items: center;
     border-radius: 50% ;
 }
-    .icon-user{
+    .icon-user, .icon-lock{
         font-size: 60px;
 
     }

@@ -71,12 +71,18 @@ class Change{
         if($_POST['currency1'] == 'eur'){
 
             if($_POST['currency2'] == 'eur'){
-                _d("nera ko keisti");
+                $_SESSION['note'] = [
+                    "message" => "error",
+                    "text" => 'Pasirinktos vienodos valiutos'
+                ];
             }
 
             if($_POST['currency2'] == 'usd'){
                 if($_POST['sum'] > $userEur){
-                    _d("Nepakankamai pinigu");
+                    $_SESSION['note'] = [
+                        "message" => "error",
+                        "text" => 'Nepakankamai lesu saskaitoje'
+                    ];
                 }else{
                     $rate = self::getEURtoUSD();
                     $usdToAdd = $_POST['sum'] * $rate;
@@ -84,6 +90,11 @@ class Change{
                     $user['eur'] -= $_POST['sum'];
 
                     $duomenys->update($userId, $user);
+
+                    $_SESSION['note'] = [
+                        "message" => "message",
+                        "text" => 'Operacija sekminga'
+                    ];
                 }
             }
         }
@@ -91,12 +102,21 @@ class Change{
         if($_POST['currency1'] == 'usd'){
 
             if($_POST['currency2'] == 'usd'){
-                _d("nera ko keisti");
+
+                $_SESSION['note'] = [
+                    "message" => "error",
+                    "text" => 'Pasirinktos vienodos valiutos'
+                ];
             }
 
             if($_POST['currency2'] == 'eur'){
                 if($_POST['sum'] > $userUsd){
-                    _d("Nepakankamai pinigu");
+
+                    $_SESSION['note'] = [
+                        "message" => "error",
+                        "text" => 'Nepakankamai lesu saskaitoje'
+                    ];
+
                 }else{
                     $rate = self::getUSDtoEUR();
                     $eurToAdd = $_POST['sum'] * $rate;
@@ -104,6 +124,11 @@ class Change{
                     $user['usd'] -= $_POST['sum'];
 
                     $duomenys->update($userId, $user);
+
+                    $_SESSION['note'] = [
+                        "message" => "message",
+                        "text" => 'Operacija sekminga'
+                    ];
                 }
             }
         }

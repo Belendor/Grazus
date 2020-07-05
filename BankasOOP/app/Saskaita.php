@@ -9,17 +9,17 @@ class Saskaita {
 
         if(!empty($_POST) && self::validateId()){
     
-        $newObject = [
-            'name'=> $_POST['name'],
-            'surename' => $_POST['surename'],
-            'account' => $_POST['account'],
-            'id' => $_POST['id'],
-            'eur' => 0,
-            'usd' => 0
-        ];
+            $newObject = [
+                'name'=> $_POST['name'],
+                'surename' => $_POST['surename'],
+                'account' => $_POST['account'],
+                'id' => $_POST['id'],
+                'eur' => 0,
+                'usd' => 0
+            ];
 
-        $duomenys = new Duomenys;
-        $duomenys->create($newObject);
+            $duomenys = new Duomenys;
+            $duomenys->create($newObject);
 
         }
     }
@@ -32,6 +32,12 @@ class Saskaita {
             if($value['id'] == $_POST['id']){
             
                 $uniqueId = false;
+
+                $_SESSION['note'] = [
+                    "message" => "error",
+                    "text" => "Saskaita: ".$_POST['id']." jau egzistuoja!"
+                ];
+
             }
         }
 
@@ -40,8 +46,24 @@ class Saskaita {
     public static function remove($id){
 
         $duomenys = new Duomenys;
-        $duomenys->delete($id);
+        $user = $duomenys->show($id);
 
+        if($user['usd'] > 0 || $user['eur'] > 0){
+
+            $_SESSION['note'] = [
+                "message" => "error",
+                "text" => 'Saskaita nera tuscia!'
+            ];
+
+        }else{
+
+            $_SESSION['note'] = [
+                "message" => "message",
+                "text" => "Saskaita: $id istrinta sekmingai!"
+            ];
+
+            $duomenys->delete($id);
+        }
     }
     public static function sum(){
 

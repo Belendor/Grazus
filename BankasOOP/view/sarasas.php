@@ -1,5 +1,4 @@
-<?php
-use App\Db\Duomenys;
+<?php use App\Db\Duomenys; use App\FlashMessages;
 
 $duomenys = new Duomenys;
 $data = $duomenys->showAll();
@@ -18,12 +17,11 @@ foreach($data as $value){
             <td>".$value['surename']."</td>
             <td>".$value['account']."</td>
             <td>".$value['id']."</td>
-            <td> $delete | $add | $minus | $change </td>
+            <td> $delete | $add | $minus | $change</td>
             </tr>";
 
     $table .= $row;
 }
-
 
 ?>
 
@@ -44,16 +42,7 @@ foreach($data as $value){
         <a class="navButton" href="./../public/saskaita">Nauja saskaita <i class="icon-file-text-alt"></i></a>
     </div>
 
-    <p class="<?=$errorColor?> "><?php  
-        
-        if(isset($_SESSION['note'])) {
-        
-            echo $_SESSION['note']['text'];
-            unset($_SESSION['note']);
-            
-        }
-
-    ?></p><br>
+    <?=FlashMessages::message()?>
 
     <div style="width 100%; border: solid 1px black">
 
@@ -63,9 +52,7 @@ foreach($data as $value){
 
             <?=$table?>
 
-        </table>
-        
+        </table>    
     </div>
-
 </body>
 </html>
