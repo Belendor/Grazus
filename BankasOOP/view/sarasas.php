@@ -7,17 +7,29 @@ $table = '';
 
 foreach($data as $value){
 
+    $avatar = '';
+
+    if(isset($value['img'])){
+        $avatar = '<img class="img-box" src="./../db/pictures/'.$value['img'].'" alt="'.$value['img'].'">';
+    }
+
     $delete = '<a style="color:red" href="./../public/delete/'.$value['id'].'">Istrinti <i class="icon-trash"></i> </a>';
     $add = '<a style="color:green" href="./../public/add/'.$value['id'].'">Prideti <i class="icon-plus"></i></a>';
     $minus = '<a style="color:orange" href="./../public/minus/'.$value['id'].'">Nuimti <i class="icon-minus"></i> </a>';
     $change = '<a style="color:black" href="./../public/change/'.$value['id'].'">Keisti valiuta <i class="icon-usd"></i></a>';
 
+    $upload = '<div class="upload-box"><form action="./../public/sarasas" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="user-avatar" value="'.$value['id'].'">
+            Avatar: <input id="file-input" type="file" name="avatar">
+            <button type="submit">Add!!!</button>
+            </form></div>';
+
     $row = "<tr>
-            <td>".$value['name']."</td>
+            <td>".$avatar.$value['name']."</td>
             <td>".$value['surename']."</td>
             <td>".$value['account']."</td>
             <td>".$value['id']."</td>
-            <td> $delete | $add | $minus | $change</td>
+            <td> $delete | $add | $minus | $change | $upload</td>
             </tr>";
 
     $table .= $row;

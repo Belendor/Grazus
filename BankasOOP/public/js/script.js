@@ -43,6 +43,6 @@ id.addEventListener("input", ()=>{
 
 })
 
-message.addEventListener("click", ()=>{
-    message.remove()
-})
+// message.addEventListener("click", ()=>{
+//     message.remove()
+// })

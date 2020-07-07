@@ -95,8 +95,8 @@ class Saskaita {
        
         if(!empty($_POST)){
             $duomenys = new Duomenys;
-
-            $user = $duomenys->show($_POST['id'] );
+            
+            $user = $duomenys->show($_POST['id']);
 
             if($_POST['currency'] == 'eur'){
 
@@ -114,6 +114,20 @@ class Saskaita {
 
             }
     
+        }
+    }
+    public static function addAvatar(){
+        if(isset($_POST) && isset($_FILES['avatar'])){
+
+            $duomenys = new Duomenys;
+            
+            $user = $duomenys->show($_POST['user-avatar']);
+
+            $user['img'] = $_FILES['avatar']['name'];
+
+            move_uploaded_file($_FILES['avatar']['tmp_name'], 'C:\xampp\htdocs\Grazus\BankasOOP\db\pictures\\'.basename($_FILES['avatar']['name']));
+            
+            $duomenys->update($_POST['user-avatar'], $user);
         }
     }
 }

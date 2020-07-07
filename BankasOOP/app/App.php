@@ -45,6 +45,7 @@ class App{
 
             }elseif($params[0] == 'sarasas' && isset($_SESSION['login'])){
 
+                Saskaita::addAvatar();
                 require('./../view/sarasas.php');
 
             }else{ // defaul redirect 
@@ -110,6 +111,7 @@ class App{
                     die();
 
                 }else{
+
                     App::$user = $params[1];
     
                     require('./../view/atimti.php');

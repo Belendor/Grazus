@@ -22,7 +22,6 @@ if(!empty($_POST)){
 
             if($_POST['name'] == $arr['name']){
                 if(md5($_POST["password"]) == $arr["password"]){
-                    _d('authenticated');
                     $_SESSION['login'] = 1;
                     header('Location: /saskaita.php');
                     die();

@@ -4,9 +4,10 @@ use App\Db\Duomenys;
 use App\App;
 
 $duomenys = new Duomenys;
-$user = $duomenys->show(App::$user);
 
-
+if(isset(App::$user)){
+    $user = $duomenys->show(App::$user);
+}
 
 $select = "<select name=\"currency\">
         <option name=\"eur-input\" value=\"eur\">EUR</option>
