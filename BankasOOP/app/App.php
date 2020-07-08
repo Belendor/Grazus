@@ -1,10 +1,9 @@
-<?php namespace App; use App\Saskaita; use App\Login;
+<?php namespace App; use App\Saskaita; use App\Login; use PDO;
 
 class App{
 
-    public $URI = '/grazus/BankasOOP/public/';
-
     public static $user = '';
+    public static $pdo;
 
     function __construct(){
         $this->start();
@@ -13,10 +12,8 @@ class App{
     public function start (){
         session_start();
 
-        $params = str_replace($this->URI, '', $_SERVER['REQUEST_URI']); //   /grazus/BankasOOP/public/
-
+        $params = str_replace('/grazus/BankasOOP/public/', '', $_SERVER['REQUEST_URI']);
         $params = explode('/', $params);
-
 
         if(count($params) == 1){
             if($params[0] == 'saskaita' && isset($_SESSION['login'])){
@@ -120,6 +117,8 @@ class App{
             
         }else{ // defaul redirect
 
+            header('Location: /grazus/BankasOOP/public/login');
+            die();
         }
     }
 }

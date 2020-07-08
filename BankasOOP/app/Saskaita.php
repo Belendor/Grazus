@@ -10,15 +10,15 @@ class Saskaita {
         if(!empty($_POST) && self::validateId()){
     
             $newObject = [
-                'name'=> $_POST['name'],
-                'surename' => $_POST['surename'],
+                'firstname'=> $_POST['name'],
+                'lastname' => $_POST['surename'],
                 'account' => $_POST['account'],
                 'id' => $_POST['id'],
                 'eur' => 0,
                 'usd' => 0
             ];
 
-            $duomenys = new Duomenys;
+            $duomenys = new Duomenys();
             $duomenys->create($newObject);
 
         }

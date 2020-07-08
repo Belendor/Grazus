@@ -1,22 +1,47 @@
 <?php
 
-namespace App\DB;
+namespace App\DB; use PDO;
 
-use App\DB\DataBase;
+use App\DB\DataBase; use App\App;
 
 
 class Duomenys implements DataBase {
+        public $pdo;
 
         public function __construct(){
+            $this->connectDb();
+        }
 
+        public function connectDb (){
+
+            $host = 'localhost';
+            $db   = 'users';
+            $user = 'root';
+            $pass = '';
+            $charset = 'utf8mb4';
+    
+            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    
+            $options = [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ];
+    
+            try {
+                $this->pdo = new PDO($dsn, $user, $pass, $options);
+            } catch (\PDOException $e) {
+                throw new \PDOException($e->getMessage(), (int)$e->getCode());
+            }
         }
 
         public function create(array $userData) : void {
+            
+            $sql = "INSERT INTO user (firstname, lastname, account, id, eur, usd) VALUES (:firstname, :lastname, :account, :id, :eur, :usd)";
 
-            $data = json_decode(file_get_contents('./../db/data.json'),1);
-            $data[] = $userData;
-            file_put_contents('./../db/data.json', json_encode($data));
+            $stmt = $this->pdo->prepare($sql);
 
+            $stmt->execute($userData);
         }
 
         public function update(int $userId, array $userData) : void{
