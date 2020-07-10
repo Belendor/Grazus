@@ -21,8 +21,8 @@ $input = '<form action="./../minus/'.App::$user.'" method="post">
         </form>';
 
 $renderRow = '<tr>
-            <td>'.$user['name'].'</td>
-            <td>'.$user['surename'].'</td>
+            <td>'.$user['firstname'].'</td>
+            <td>'.$user['lastname'].'</td>
             <td>'.$user['account'].'</td>
             <td>'.$user['id'].'</td>
             <td>'.$user['eur'].'</td>

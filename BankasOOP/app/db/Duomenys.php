@@ -14,10 +14,10 @@ class Duomenys implements DataBase {
 
         public function connectDb (){
 
-            $host = 'localhost';
-            $db   = 'users';
-            $user = 'root';
-            $pass = '';
+            $host = 'sql7.freemysqlhosting.net';
+            $db   = 'sql7353873';
+            $user = 'sql7353873';
+            $pass = 'kxuyhFK7yX';
             $charset = 'utf8mb4';
     
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -45,47 +45,46 @@ class Duomenys implements DataBase {
         }
 
         public function update(int $userId, array $userData) : void{
-            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
 
-            foreach($data as $key => $user){
-                if($userId == $data[$key]['id']){
-                    $data[$key] = $userData;
-                }
-            }
-            file_put_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json', json_encode($data));
+            $sql = "UPDATE user SET firstname=?, lastname=?, account=?, id=?, eur=?, usd=? WHERE id = $userId";
+            
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->execute([$userData['firstname'], $userData['lastname'], $userData['account'], $userData['id'], $userData['eur'], $userData['usd']]);
+
         }
 
         public function delete(int $userId) : void{
 
-            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
+            $sql = "DELETE FROM user WHERE id = :id";
 
-            foreach($data as $key => $user){
-                if($userId == $data[$key]['id']){
-                    array_splice($data, $key, 1);
-                }
-            }
+            $stmt = $this->pdo->prepare($sql);
+            
+            $stmt->execute(['id' => $userId]);
 
-            file_put_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json', json_encode($data));
         }
 
         public function show(int $userId) : array{
 
-            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
+            $sql = "SELECT * FROM user WHERE id = $userId";
 
-            foreach($data as $key => $user){
+            $stmt = $this->pdo->query($sql);   
+            
+            $row = $stmt->fetch();
 
-                if($userId == $user['id']){
+            return $row;
 
-                    return  $data[$key];
-                }
-            }
         }
 
         public function showAll() : array{
-            
-            $data = json_decode(file_get_contents('C:\xampp\htdocs\Grazus\BankasOOP\db\data.json'),1);
 
-            $sorted = $this->sort($data);
+            $sql = "SELECT * FROM user";
+
+            $stmt = $this->pdo->query($sql);
+               
+            $table = $stmt->fetchAll();
+
+            $sorted = $this->sort($table);
 
             return $sorted;
 
@@ -103,10 +102,9 @@ class Duomenys implements DataBase {
                         // Irasyti kokias arejaus reiksmes lyginti
                         //------------------------------------------
             
-                        $firstElement = strnatcmp($array[$i]['surename'], $array[$i+1]['surename']);
-                        $secondElement = strnatcmp($array[$i+1]['surename'], $array[$i]['surename']);
+                        $firstElement = strnatcmp($array[$i]['lastname'], $array[$i+1]['lastname']);
+                        $secondElement = strnatcmp($array[$i+1]['lastname'], $array[$i]['lastname']);
                         // -----------------------------------------
-            
             
                         if($firstElement > $secondElement){ // '>' Didejimo tvarka, '<' Mazejimo tvarka.
                             $temp = $array[$i];

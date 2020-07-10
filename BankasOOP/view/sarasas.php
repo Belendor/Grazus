@@ -25,8 +25,8 @@ foreach($data as $value){
             </form></div>';
 
     $row = "<tr>
-            <td>".$avatar.$value['name']."</td>
-            <td>".$value['surename']."</td>
+            <td>".$avatar.$value['firstname']."</td>
+            <td>".$value['lastname']."</td>
             <td>".$value['account']."</td>
             <td>".$value['id']."</td>
             <td> $delete | $add | $minus | $change | $upload</td>
