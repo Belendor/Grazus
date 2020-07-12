@@ -6,40 +6,78 @@ use App\DB\DataBase; use App\App;
 
 
 class Duomenys implements DataBase {
-        public $pdo;
+        public static $pdo;
 
         public function __construct(){
             $this->connectDb();
         }
 
         public function connectDb (){
+            if(!isset(self::$pdo)){
 
-            $host = 'sql7.freemysqlhosting.net';
-            $db   = 'sql7353873';
-            $user = 'sql7353873';
-            $pass = 'kxuyhFK7yX';
-            $charset = 'utf8mb4';
-    
-            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    
-            $options = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES   => false,
-            ];
-    
-            try {
-                $this->pdo = new PDO($dsn, $user, $pass, $options);
-            } catch (\PDOException $e) {
-                throw new \PDOException($e->getMessage(), (int)$e->getCode());
+                $host = 'sql7.freemysqlhosting.net';
+                $db   = 'sql7353873';
+                $user = 'sql7353873';
+                $pass = 'kxuyhFK7yX';
+                $charset = 'utf8mb4';
+        
+                $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        
+                $options = [
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES   => false,
+                ];
+        
+                try {
+                    self::$pdo = new PDO($dsn, $user, $pass, $options);
+                    self::$pdo->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
+                } catch (\PDOException $e) {
+                    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+                }
+
             }
+
+
+            // try {
+            //     $sql = "CREATE TABLE IF NOT EXISTS user (
+            //         firstname VARCHAR(30) NOT NULL,
+            //         lastname VARCHAR(30) NOT NULL,
+            //         account VARCHAR(30) NOT NULL,
+            //         id BIGINT(50) UNSIGNED PRIMARY KEY,
+            //         eur DECIMAL(20,2) NOT NULL,
+            //         usd DECIMAL(20,2) NOT NULL,
+            //         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            //         )";
+                  
+            //         self::$pdo->exec($sql);
+            //         echo "USER created successfully";
+            //       } catch(PDOException $e) {
+            //         echo $sql . "<br>" . $e->getMessage();
+            //     }
+
+            // try {
+            //     $sql = "CREATE TABLE IF NOT EXISTS picture (
+
+            //         fname VARCHAR(50) NOT NULL,
+            //         userID BIGINT(50) UNSIGNED PRIMARY KEY,
+            //         reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            //         FOREIGN KEY (userID) REFERENCES user(id)
+            //         )";
+                  
+            //         self::$pdo->exec($sql);
+            //         echo "<br>pictures created successfully";
+            //       } catch(PDOException $e) {
+            //         echo $sql . "<br>" . $e->getMessage();
+            // }
+
         }
 
         public function create(array $userData) : void {
             
             $sql = "INSERT INTO user (firstname, lastname, account, id, eur, usd) VALUES (:firstname, :lastname, :account, :id, :eur, :usd)";
 
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = self::$pdo->prepare($sql);
 
             $stmt->execute($userData);
         }
@@ -48,7 +86,7 @@ class Duomenys implements DataBase {
 
             $sql = "UPDATE user SET firstname=?, lastname=?, account=?, id=?, eur=?, usd=? WHERE id = $userId";
             
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = self::$pdo->prepare($sql);
 
             $stmt->execute([$userData['firstname'], $userData['lastname'], $userData['account'], $userData['id'], $userData['eur'], $userData['usd']]);
 
@@ -58,7 +96,7 @@ class Duomenys implements DataBase {
 
             $sql = "DELETE FROM user WHERE id = :id";
 
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = self::$pdo->prepare($sql);
             
             $stmt->execute(['id' => $userId]);
 
@@ -68,26 +106,41 @@ class Duomenys implements DataBase {
 
             $sql = "SELECT * FROM user WHERE id = $userId";
 
-            $stmt = $this->pdo->query($sql);   
+            $stmt = self::$pdo->query($sql);   
             
             $row = $stmt->fetch();
 
             return $row;
-
         }
 
         public function showAll() : array{
 
-            $sql = "SELECT * FROM user";
+            $sql ="SELECT *
+            FROM user
+            Left JOIN picture
+            ON user.id = picture.userID";
 
-            $stmt = $this->pdo->query($sql);
-               
+            $stmt = self::$pdo->query($sql);
+            
             $table = $stmt->fetchAll();
+
+            _d($table);
 
             $sorted = $this->sort($table);
 
             return $sorted;
 
+        }
+        public function addPicture($filename, $userID){
+
+            if(!isset($user['fname'])){
+                $sql = "INSERT INTO picture (fname, userID) VALUES (?, ?)";
+                $stmt = self::$pdo->prepare($sql);
+                $stmt->execute([$filename, $userID]);
+
+            }else{
+                _d('avataras priskirtas');
+            }
         }
 
         private function sort(array $userData) {

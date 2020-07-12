@@ -9,8 +9,8 @@ foreach($data as $value){
 
     $avatar = '';
 
-    if(isset($value['img'])){
-        $avatar = '<img class="img-box" src="./../db/pictures/'.$value['img'].'" alt="'.$value['img'].'">';
+    if(isset($value['fname'])){
+        $avatar = '<img class="img-box" src="./../db/pictures/'.$value['fname'].'" alt="'.$value['fname'].'">';
     }
 
     $delete = '<a style="color:red" href="./../public/delete/'.$value['id'].'">Istrinti <i class="icon-trash"></i> </a>';

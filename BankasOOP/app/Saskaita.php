@@ -121,13 +121,13 @@ class Saskaita {
 
             $duomenys = new Duomenys;
             
-            $user = $duomenys->show($_POST['user-avatar']);
+            $imgName = basename($_FILES['avatar']['name']);
+            $duomenys->addPicture($imgName, $_POST['user-avatar']);
 
-            $user['img'] = $_FILES['avatar']['name'];
+            $rootDir = str_replace('app', '', __DIR__);
 
-            move_uploaded_file($_FILES['avatar']['tmp_name'], 'C:\xampp\htdocs\Grazus\BankasOOP\db\pictures\\'.basename($_FILES['avatar']['name']));
+            move_uploaded_file($_FILES['avatar']['tmp_name'], $rootDir.'db\pictures\\'.$imgName);
             
-            $duomenys->update($_POST['user-avatar'], $user);
         }
     }
 }
